@@ -545,8 +545,8 @@ void Render(OpenGL *ogl)
 	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//настройка материала
-	GLfloat amb[] = { 0.2, 0.2, 0.1, 1. };
-	GLfloat dif[] = { 0.4, 0.65, 0.5, 1. };
+	GLfloat amb[] = { 0.2, 0.2, 0.2, 1. };
+	GLfloat dif[] = { 1, 1, 1, 1. };
 	GLfloat spec[] = { 0.9, 0.8, 0.3, 1. };
 	GLfloat sh = 0.1f * 256;
 
