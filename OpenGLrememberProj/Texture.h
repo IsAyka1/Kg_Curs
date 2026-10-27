@@ -3,7 +3,7 @@
 
 #include <string>
 #include <windows.h>
-#include <GL\GL.h>
+#include <GL/gl.h>
 
 class Texture
 {
@@ -17,8 +17,8 @@ public:
 
 	void bindTexture();
 	
-	static int Texture::LoadBMP(__in LPCSTR  filename, __out int* Wigth, __out int *Height, __out RGBTRIPLE **arr);
-	static int RGBtoChar(__in RGBTRIPLE *arr, __in int width, __in int height, __out char **out);
+	static int LoadBMP(LPCSTR  filename, int* Wigth, int *Height, RGBTRIPLE **arr);
+	static int RGBtoChar(RGBTRIPLE *arr, int width, int height, char **out);
 };
 
 

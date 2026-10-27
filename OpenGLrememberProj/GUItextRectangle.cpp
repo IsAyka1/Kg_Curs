@@ -2,7 +2,7 @@
 #include <algorithm>
 
 #include <windows.h>
-#include <gl\GL.h>
+#include <GL/gl.h>
 
 class GuiTextRectanglePrivate
 {

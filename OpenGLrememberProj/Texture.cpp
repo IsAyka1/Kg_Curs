@@ -1,6 +1,6 @@
 
 #include "Texture.h"
-#include <GL\GLU.h>
+#include <GL/glu.h>
 
 
 
@@ -54,7 +54,7 @@ void Texture::bindTexture()
 	glBindTexture(GL_TEXTURE_2D, texId);
 }
 
-int Texture::LoadBMP(__in LPCSTR  filename, __out int* Wigth, __out int *Height, __out RGBTRIPLE **arr)
+int Texture::LoadBMP(LPCSTR  filename, int* Wigth, int *Height, RGBTRIPLE **arr)
 {
 	DWORD nBytesRead = 0;
 	int read_size = 0;
@@ -104,7 +104,7 @@ int Texture::LoadBMP(__in LPCSTR  filename, __out int* Wigth, __out int *Height,
 
 //ѕереводим BMP в массив чароов.  ќдин пиксаль кодируетс€ последовательно 4м€ байтами (R G B A)
 //“ак же тут картинка переворачиваетс€, в BMP она хранитс€ перевернутой.
-int Texture::RGBtoChar(__in RGBTRIPLE *arr, __in int width, __in int height, __out char **out)
+int Texture::RGBtoChar(RGBTRIPLE *arr, int width, int height, char **out)
 {
 	int size = height*width * 4;
 	char *mas;

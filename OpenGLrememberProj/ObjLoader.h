@@ -2,7 +2,7 @@
 #define OBJLOADER_H
 
 #include <windows.h>
-#include <GL/GL.h>
+#include <GL/gl.h>
 #include <list>
 #include <deque>
 
@@ -114,6 +114,6 @@ struct ObjFile
 	
 };
 
-int loadModel(char *filename, ObjFile *file);
+int loadModel(const char *filename, ObjFile *file);
 
 #endif

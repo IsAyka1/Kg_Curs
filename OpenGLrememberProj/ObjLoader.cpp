@@ -53,7 +53,7 @@ int ReadUInt(string &s, int *pos, unsigned int *value)
 
 
 
-int loadModel(char *filename, ObjFile *file)
+int loadModel(const char *filename, ObjFile *file)
 {
 
 	
@@ -70,7 +70,7 @@ int loadModel(char *filename, ObjFile *file)
 
 	buf_size = size.LowPart;
 	 	
-	buf = new char[buf_size]; //TODO обработать исключение
+	buf = new char[buf_size + 1](); //TODO обработать исключение
 	
 	DWORD nBytesRead = 0;
 	
@@ -273,7 +273,7 @@ int loadModel(char *filename, ObjFile *file)
 		if (cur > (buf+buf_size))
 			break;		
 	}	
-	delete buf;
+	delete[] buf;
 	
 
 	glDeleteLists(file->listId, 1);

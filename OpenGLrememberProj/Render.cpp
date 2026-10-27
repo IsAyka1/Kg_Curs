@@ -1,10 +1,9 @@
 #include "Render.h"
 #include <windows.h>
 
-#include <GL\gl.h>
-#include <GL\glu.h>
-#include "GL\glext.h"
-#include <chrono>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include "GL/glext.h"
 #include <sstream>
 
 #include "MyOGL.h"
@@ -80,7 +79,7 @@ public:
 		LookAt();
 	}
 
-	void CustomCamera::LookAt()
+	void LookAt()
 	{
 		gluLookAt(pos.X(), pos.Y(), pos.Z(), lookPoint.X(), lookPoint.Y(), lookPoint.Z(), normal.X(), normal.Y(), normal.Z());
 	}
@@ -459,7 +458,7 @@ void initRender(OpenGL *ogl)
 
 	rec.setSize(300, 100);
 	rec.setPosition(10, ogl->getHeight() - 100-10);
-	rec.setText("W - ¬верх,\nS - ¬низ\n",0,0,0);
+	rec.setText("W - up,\nS - down\n", char(240), char(240), char(240));
 }
 
 bool flag = true;
@@ -501,18 +500,15 @@ void DrawBalls(Ball& tmp, int ang) {
 }
 
 float all_time = 0;
-std::chrono::high_resolution_clock::time_point last_time;
 
 void Render(OpenGL *ogl)
 {
 	std::stringstream ss;
-	std::chrono::duration<double> tmp = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - last_time);
-	Time += tmp.count() / 100'000;
-	all_time += tmp.count() / 100'000;
-	ss << Time << std::endl;
-	OutputDebugString(ss.str().c_str());
 	tick_o = tick_n;
 	tick_n = GetTickCount();
+	const float deltaSeconds = (tick_n - tick_o) / 1000.0f;
+	Time += deltaSeconds;
+	all_time += deltaSeconds;
 	//Time += (tick_n - tick_o) / 1000.0;
 	
 	
@@ -570,7 +566,7 @@ void Render(OpenGL *ogl)
 	DrawPlane();
 	static u_int ball_count = 1;
 	static u_int level_count = 1;
-	static int spawn_time = 10;
+	static float spawn_time = 10;
 	static int spawn_last = 0;
 	static int ang = 2;
 	
@@ -600,10 +596,10 @@ void Render(OpenGL *ogl)
 		player.Collusion(balls);
 		if (all_time >= 300) { //Level up
 			all_time = 0;
-			spawn_time -= 0.5;//
+			spawn_time = (spawn_time > 1.0f) ? spawn_time - 0.5f : 1.0f;//
 			//balls.clear();
 			level_count++;
-			Ball::Speed -= 15;
+			Ball::Speed = (Ball::Speed > 15.0f) ? Ball::Speed - 15.0f : 15.0f;
 			//ball_count++;
 		}
 		if (!balls.empty() && balls[0].Position.x < -35) {

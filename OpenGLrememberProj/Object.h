@@ -2,8 +2,8 @@
 #define OBJECT_H
 
 #include <windows.h>
-#include <gl/GL.h>
-#include <gl/GLU.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #include "MyVector3d.h"
 
